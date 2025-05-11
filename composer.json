@@ -1,0 +1,29 @@
+{
+  "name": "bajjour/stripe",
+  "version": "1.0.0",
+  "description": "A Laravel package for Stripe payment gateway",
+  "type": "library",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "Stripe\\": "src/"
+    }
+  },
+  "require": {
+    "php": "^8.0",
+    "illuminate/support": "^9.0|^10.0|^11.0|^12.0",
+    "illuminate/cache": "^9.0|^10.0|^11.0|^12.0"
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Stripe\\StripeServiceProvider"
+      ],
+      "aliases": {
+        "Stripe": "Stripe\\Facades\\Stripe"
+      }
+    }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}

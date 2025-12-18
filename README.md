@@ -208,6 +208,50 @@ $response = $this->stripe->get_invoice_status($invoice_id);
 // essentials returned parameters (id, hosted_invoice_url, invoice_pdf, status).
 ```
 
+## Refund
+to handle stripe refunds functions you need to call the following functions.
+
+```php
+
+//create refund
+$response = $this->stripe->create_refund([
+    'payment_intent' => 'pi_xxxxxxxxxx',
+    'reason' => 'requested_by_customer', //optional one of the following (duplicate, fraudulent, requested_by_customer)
+    'amount' => '10', //optional, send only if you need to make a partial refund
+]);
+
+//the following response is expected
+{
+    "id": "refund_id",
+    "object": "refund",
+    "amount": refund_amount,
+    "currency": "usd",
+    "destination_details": {
+        "card": {
+            "reference_status": "pending",
+            "reference_type": "acquirer_reference_number",
+            "type": "refund"
+        },
+        "type": "card"
+    },
+    "metadata": {},
+    "payment_intent": "pi_xxxxxxxxxx",
+    "reason": null,
+    "receipt_number": null,
+    "source_transfer_reversal": null,
+    "status": "succeeded",
+    "transfer_reversal": null
+}
+
+//get refund
+$response = $this->stripe->get_refund('refund_id');
+//return the same of create refund response, but with updated status
+
+//cancel refund in rare cases
+$response = $this->stripe->cancel_refund('refund_id');
+
+```
+
 ## API Documentation
 
 For more details about the Stripe API, refer to the official documentation:

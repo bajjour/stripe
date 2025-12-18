@@ -22,4 +22,8 @@ interface StripeInterface
 
     public function get_invoice_status(string $invoice_id): array;
 
+    public function create_refund(array $p_data): array;
+    public function get_refund(string $refund_id): array;
+    public function cancel_refund(string $refund_id): array;
+
 }

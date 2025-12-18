@@ -153,6 +153,42 @@ class StripeService implements StripeInterface
     }
 
     /**
+     * Create Refund
+     * @throws StripeException
+     */
+    public function create_refund(array $p_data): array
+    {
+        $this->validate_required_keys($p_data, [
+            'payment_intent',
+        ]);
+
+        $data = [
+            'payment_intent' => $p_data['payment_intent'],
+        ];
+
+        $this->fill_optional_data($p_data, $p_data, 'reason', 'reason');
+        $this->fill_optional_data($p_data, $p_data, 'amount', 'amount');
+
+        return $this->request('post', '/refunds/', $data);
+    }
+
+    /**
+     * Get Refund Status
+     */
+    public function get_refund(string $refund_id): array
+    {
+        return $this->request('get', '/refunds/' . $refund_id, []);
+    }
+
+    /**
+     * Cancel Refund
+     */
+    public function cancel_refund(string $refund_id): array
+    {
+        return $this->request('post', '/refunds/' . $refund_id, []);
+    }
+
+    /**
      * @throws StripeException
      */
     private function create_session(array $p_data): array

@@ -169,7 +169,7 @@ class StripeService implements StripeInterface
         $this->fill_optional_data($p_data, $p_data, 'reason', 'reason');
         $this->fill_optional_data($p_data, $p_data, 'amount', 'amount');
 
-        return $this->request('post', '/refunds/', $data);
+        return $this->request('post', '/refunds', $data);
     }
 
     /**
